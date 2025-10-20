@@ -1,0 +1,209 @@
+[
+    {
+        "id": "2609a2045e241fbf",
+        "type": "tab",
+        "label": "AC Control",
+        "disabled": true
+    },
+    {
+        "id": "16b07ccfcb02d3ce",
+        "type": "ui_button",
+        "z": "2609a2045e241fbf",
+        "name": "Power ON",
+        "group": "UI",
+        "order": 1,
+        "width": 2,
+        "height": 1,
+        "passthru": false,
+        "label": "AC ON",
+        "tooltip": "",
+        "color": "white",
+        "bgcolor": "green",
+        "className": "",
+        "icon": "fa-power-off",
+        "payload": "{\"power\":\"on\"}",
+        "payloadType": "json",
+        "topic": "",
+        "topicType": "str",
+        "x": 150,
+        "y": 100,
+        "wires": [
+            [
+                "04d5dea7e97a7268"
+            ]
+        ]
+    },
+    {
+        "id": "74df39f8a162ebae",
+        "type": "ui_button",
+        "z": "2609a2045e241fbf",
+        "name": "Power OFF",
+        "group": "UI",
+        "order": 2,
+        "width": 2,
+        "height": 1,
+        "passthru": false,
+        "label": "AC OFF",
+        "tooltip": "",
+        "color": "white",
+        "bgcolor": "red",
+        "className": "",
+        "icon": "fa-power-off",
+        "payload": "{\"power\":\"off\"}",
+        "payloadType": "json",
+        "topic": "",
+        "topicType": "str",
+        "x": 150,
+        "y": 160,
+        "wires": [
+            [
+                "04d5dea7e97a7268"
+            ]
+        ]
+    },
+    {
+        "id": "49da0149584b2d6a",
+        "type": "ui_numeric",
+        "z": "2609a2045e241fbf",
+        "name": "Set Temperature",
+        "label": "Suhu",
+        "tooltip": "",
+        "group": "UI",
+        "order": 3,
+        "width": 3,
+        "height": 1,
+        "wrap": false,
+        "passthru": true,
+        "topic": "",
+        "topicType": "str",
+        "format": "{{value}} °C",
+        "min": 16,
+        "max": 30,
+        "step": 1,
+        "className": "",
+        "x": 150,
+        "y": 220,
+        "wires": [
+            [
+                "443a6c4cd8dc7dd5"
+            ]
+        ]
+    },
+    {
+        "id": "443a6c4cd8dc7dd5",
+        "type": "function",
+        "z": "2609a2045e241fbf",
+        "name": "Format Temp",
+        "func": "msg.payload = {\"temp\": msg.payload};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 220,
+        "wires": [
+            [
+                "04d5dea7e97a7268"
+            ]
+        ]
+    },
+    {
+        "id": "628e9444ec2d2ba3",
+        "type": "ui_text",
+        "z": "2609a2045e241fbf",
+        "group": "UI",
+        "order": 4,
+        "width": 6,
+        "height": 1,
+        "name": "AC Status",
+        "label": "Status",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 520,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "04d5dea7e97a7268",
+        "type": "websocket out",
+        "z": "2609a2045e241fbf",
+        "name": "TO esp32",
+        "server": "",
+        "client": "ws_client",
+        "x": 540,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "932e3f19cab53165",
+        "type": "websocket in",
+        "z": "2609a2045e241fbf",
+        "name": "From esp32",
+        "server": "",
+        "client": "ws_client",
+        "x": 150,
+        "y": 280,
+        "wires": [
+            [
+                "628e9444ec2d2ba3",
+                "bcdeb93fdc336bac"
+            ]
+        ]
+    },
+    {
+        "id": "bcdeb93fdc336bac",
+        "type": "debug",
+        "z": "2609a2045e241fbf",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 360,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "UI",
+        "type": "ui_group",
+        "name": "AC Control",
+        "tab": "UI_TAB",
+        "order": 1,
+        "disp": true,
+        "width": "6"
+    },
+    {
+        "id": "ws_client",
+        "type": "websocket-client",
+        "path": "ws://192.168.223.235:81/",
+        "tls": "",
+        "wholemsg": "false",
+        "hb": "0",
+        "subprotocol": "",
+        "headers": []
+    },
+    {
+        "id": "UI_TAB",
+        "type": "ui_tab",
+        "name": "Dashboard",
+        "icon": "dashboard",
+        "order": 1
+    },
+    {
+        "id": "ea7b5eca4a06bce9",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-dashboard": "3.6.6"
+        }
+    }
+]
