@@ -131,6 +131,6 @@ Silakan gunakan, ubah, dan kembangkan sesuai kebutuhan.
 ## 👤 Author
 
 **Lukman Hafiz**  
-📧 lukman@example.com  
-💻 GitHub: [@lukmanhafiz](https://github.com/lukmanhafiz)
+📧 harusdapetemas22@gmail,com
+💻 GitHub: github.com/Lukmanhafiz
 
